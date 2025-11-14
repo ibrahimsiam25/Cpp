@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1762950053 source:c:\users\siam\desktop\iti\coureses\4_oop\labs\lab_8\abajora\main.cpp
+	"graphics.h"
+	<iostream>
+
+1762859580 c:\users\siam\desktop\iti\coureses\4_oop\labs\lab_8\abajora\graphics.h
+	<iostream>
+	<math.h>
+	<windows.h>
+	<Windows.h>
+

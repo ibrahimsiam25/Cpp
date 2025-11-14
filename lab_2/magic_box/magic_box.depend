@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1762172049 source:c:\users\siam\desktop\magic_box\main.cpp
+	<iostream>
+	<stdlib.h>
+	<windows.h>
+
+1762200942 source:c:\users\siam\desktop\lab_2\magic_box\main.cpp
+	<iostream>
+	<stdlib.h>
+	<windows.h>
+
