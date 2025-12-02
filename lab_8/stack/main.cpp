@@ -74,7 +74,7 @@ Stack(const Stack& oldObject)
         }
         return result;
     }
-    //
+
     int IsFull(){return tos==size;}
     int IsEmpty(){return tos==0;}
 
@@ -101,68 +101,90 @@ Stack(const Stack& oldObject)
 
         return result;
     }
-   Stack& operator=(const Stack& right)
-    {
-        delete[] arr;
-        tos=right.tos;
-        size=right.size;
-        arr=new int[size];
-        for (int i = 0; i < tos; i++)
-        {
-            arr[i]=right.arr[i];
-        }
-        return *this;
-    }
-
-       bool operator==( Stack& right)
-    {
-        int  sixeRightOfStack =  right.tos ;
-        int   sixeLeftOfStack =  tos ;
-        int* arrRight;
-        arrRight = new int[ sixeRightOfStack];
-      for(int i =0 ; i<sixeRightOfStack ;i++ )
-        {
-
-           arrRight[i]=right.Pop();
-
-           for(int j =0 ; j<sixeLeftOfStack  ;j++ ){
-
-            if(arr[j]==  arrRight[i])
-               {
-
-                Pop();}
-           }
-
-        }
-        bool x  =  tos == 0&&right.tos==0 ? true : false ;
-        if(x == 1){
-             cout<<"====== equal"<<endl;
-        } else{
-             cout<<"======  not equal"<<endl;
-        }
-        return   x ;
-    }
-};
-void ViewStack(Stack param)
+bool operator==(Stack& right)
 {
-    for (int  i = 0; i < param.tos; i++)
+
+    Stack temp1(*this);
+    Stack temp2(right);
+
+    for(int i = 0; i < tos; i++)
     {
-        cout<<param.arr[i]<<endl;
+        int val = temp1.Pop();
+        bool found = false;
+        for(int j = 0; j < temp2.tos; j++)
+        {
+            int tempVal = temp2.Pop();
+            if(tempVal == val)
+            {
+                found = true;
+            }
+            else
+            {
+                temp2.Push(tempVal);
+            }
+        }
+
+        if(!found) {
+            cout << "====== not equal" << endl;
+            return false;
+        }
+    }
+
+    cout << "====== equal" << endl;
+    return true;
+}
+Stack operator+(Stack& right)
+{
+
+    int newSize = this->tos + right.tos;
+    Stack result(newSize);
+
+
+    for(int i = 0; i < this->tos; i++)
+    {
+        result.Push(this->arr[i]);
+    }
+
+    for(int i = 0; i < right.tos; i++)
+    {
+        result.Push(right.arr[i]);
+    }
+
+    return result;
+}
+Stack& operator=(const Stack& right) {
+    if (this != &right) {
+        delete[] arr;
+        size = right.size;
+        tos = right.tos;
+        arr = new int[size];
+        for (int i = 0; i < tos; i++)
+            arr[i] = right.arr[i];
+    }
+    return *this;
+}
+void ViewStack()
+{
+    for (int  i = 0; i < tos; i++)
+    {
+        cout<<arr[i]<<endl;
     }
 }
+};
+
 
 int main()
 {
     Stack s1(10);
-
     Stack s2 (10);
+    Stack s3 (30);
 
     s1.Push(10);
     s1.Push(20);
     s1.Push(30);
     s1.Push(40);
     s1.Push(50);
-    s1.Push(60);
+    s1.Push(70);
     s1.Push(70);
 
 
@@ -174,9 +196,12 @@ int main()
     s2.Push(60);
     s2.Push(70);
 
-    s1==s2;
 
-    //ViewStack(s1);
+
+   s1==s2;
+  //   s3=s1+s2;
+  s1.ViewStack();  s1.ViewStack();
+
    // s2 = s1.Reverse();
   //  ViewStack(s2);
 }
